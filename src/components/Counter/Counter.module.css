@@ -1,0 +1,16 @@
+.counter {
+    width: 90%;
+    height: 60%;
+    background-color: #61dafb;
+    border-radius: 15px;
+    font-size: 50px;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.red {
+    color: red;
+}
+
