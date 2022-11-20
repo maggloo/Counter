@@ -1,17 +1,20 @@
-export type settingsReducerInitialType = {
+export type SettingsReducerInitialType = {
     maxInputValue: number,
     startInputValue: number,
     idDisabled: boolean
 }
 
-const settingsReducerInitialState: settingsReducerInitialType = {
-    maxInputValue: 5,
-    startInputValue: 0,
+const start = localStorage.getItem('startValue')
+const max = localStorage.getItem('maxValue')
+
+const settingsReducerInitialState: SettingsReducerInitialType = {
+    maxInputValue: max? +max : 5,
+    startInputValue: start? +start : 0,
     idDisabled: false
 }
 
 
-export const settingsReducer = (state = settingsReducerInitialState, action: ActionTypes): settingsReducerInitialType => {
+export const settingsReducer = (state = settingsReducerInitialState, action: ActionTypes): SettingsReducerInitialType => {
     switch (action.type) {
         case "SET_MAX_VALUE":
             return {...state, maxInputValue: action.maxValue}
@@ -25,11 +28,11 @@ export const settingsReducer = (state = settingsReducerInitialState, action: Act
 
 }
 
-type setMaxValueAT = ReturnType<typeof setMaxValueAC>;
-type setStartValueAT = ReturnType<typeof setStartValueAC>;
-type toggleSetButtonSetAT = ReturnType<typeof toggleSetButtonSetAC>;
+type SetMaxValueAT = ReturnType<typeof setMaxValueAC>;
+type SetStartValueAT = ReturnType<typeof setStartValueAC>;
+type ToggleSetButtonSetAT = ReturnType<typeof toggleSetButtonSetAC>;
 
-type ActionTypes = setMaxValueAT | setStartValueAT | toggleSetButtonSetAT
+type ActionTypes = SetMaxValueAT | SetStartValueAT | ToggleSetButtonSetAT
 
 
 export const setMaxValueAC = (maxValue: number) => {

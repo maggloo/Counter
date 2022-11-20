@@ -1,14 +1,14 @@
-export type counterReducerInitialStateType = {
+export type CounterReducerInitialStateType = {
     counter: number,
     message: string
 }
 
-const counterReducerInitialState: counterReducerInitialStateType = {
+const counterReducerInitialState: CounterReducerInitialStateType = {
     counter: 0,
     message: ''
 }
 
-export const counterReducer = (state = counterReducerInitialState, action: ActionTypes): counterReducerInitialStateType => {
+export const counterReducer = (state = counterReducerInitialState, action: ActionTypes): CounterReducerInitialStateType => {
     switch (action.type) {
         case "SET_COUNTER_VALUE":
             return {...state, counter: action.counterVal}
@@ -21,9 +21,9 @@ export const counterReducer = (state = counterReducerInitialState, action: Actio
 }
 
 
-type setCounterValueAT = ReturnType<typeof setCounterValueAC>;
-type setMessageAT = ReturnType<typeof setMessageAC>;
-type ActionTypes = setCounterValueAT | setMessageAT
+type SetCounterValueAT = ReturnType<typeof setCounterValueAC>;
+type SetMessageAT = ReturnType<typeof setMessageAC>;
+type ActionTypes = SetCounterValueAT | SetMessageAT
 
 export const setCounterValueAC = (counterVal: number) => {
     return {
