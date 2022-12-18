@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from '../ShowSettings/ShowSettings.module.css'
 
 type InputPropsType = {
@@ -10,7 +10,11 @@ type InputPropsType = {
 
 const Input = (props: InputPropsType) => {
 
-    let [value, setValue] = useState<number>(props.value)
+    let [value, setValue] = useState<number>(props.value);
+
+    useEffect(()=> {
+        setValue(props.value)
+    }, [props.value])
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let num = +e.currentTarget.value;

@@ -11,7 +11,7 @@ const counterReducerInitialState: CounterReducerInitialStateType = {
 export const counterReducer = (state = counterReducerInitialState, action: ActionTypes): CounterReducerInitialStateType => {
     switch (action.type) {
         case "SET_COUNTER_VALUE":
-            return {...state, counter: action.counterVal}
+            return {...state, counter: action.counter}
         case "SET_MESSAGE_VALUE":
             return {...state, message: action.message}
         default:
@@ -25,10 +25,10 @@ type SetCounterValueAT = ReturnType<typeof setCounterValueAC>;
 type SetMessageAT = ReturnType<typeof setMessageAC>;
 type ActionTypes = SetCounterValueAT | SetMessageAT
 
-export const setCounterValueAC = (counterVal: number) => {
+export const setCounterValueAC = (counter: number) => {
     return {
         type: 'SET_COUNTER_VALUE',
-        counterVal
+        counter
     } as const
 }
 

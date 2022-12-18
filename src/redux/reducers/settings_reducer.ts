@@ -1,15 +1,15 @@
+import {Dispatch} from "redux";
+import {setCounterValueAC} from "./counter_reducer";
+
 export type SettingsReducerInitialType = {
     maxInputValue: number,
     startInputValue: number,
     idDisabled: boolean
 }
 
-const start = localStorage.getItem('startValue')
-const max = localStorage.getItem('maxValue')
-
 const settingsReducerInitialState: SettingsReducerInitialType = {
-    maxInputValue: max? +max : 5,
-    startInputValue: start? +start : 0,
+    maxInputValue: 5,
+    startInputValue: 0,
     idDisabled: false
 }
 
@@ -54,4 +54,34 @@ export const toggleSetButtonSetAC = (isDisabled: boolean) => {
         type: 'TOGGLE_BUTTON',
         isDisabled
     } as const
+}
+
+
+//thunk
+
+export const setStartValueToLSTC = (startValue: number) => (dispatch: Dispatch) => {
+    localStorage.setItem('startValue', JSON.stringify(startValue));
+    dispatch(setStartValueAC(startValue));
+}
+
+export const setMaxValueToLSTC = (maxValue: number) => (dispatch: Dispatch) => {
+    localStorage.setItem('maxValue', JSON.stringify(maxValue));
+    dispatch(setMaxValueAC(maxValue))
+}
+
+export const getStartValueFromLSTC = () => (dispatch: Dispatch) => {
+    const start = localStorage.getItem('startValue');
+    if (start) {
+        let newVal = JSON.parse(start);
+        dispatch(setStartValueAC(newVal));
+        dispatch(setCounterValueAC(newVal));
+    }
+}
+
+export const getMaxValueFromLSTC = () => (dispatch: Dispatch) => {
+    const start = localStorage.getItem('maxValue');
+    if (start) {
+        let newVal = JSON.parse(start);
+        dispatch(setMaxValueAC(newVal))
+    }
 }

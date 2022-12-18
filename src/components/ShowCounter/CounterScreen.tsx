@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
 import Button from "../Button/Button";
-import {setCounterValueAC, setMessageAC} from "../../reducers/counter_reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../store";
-import {setMaxValueAC, setStartValueAC, toggleSetButtonSetAC} from "../../reducers/settings_reducer";
+import {setCounterValueAC, setMessageAC} from "../../redux/reducers/counter_reducer";
+import {useSelector} from "react-redux";
+import {AppDispatch, AppRootStateType} from "../../redux/store";
+import {
+    toggleSetButtonSetAC
+} from "../../redux/reducers/settings_reducer";
 import Counter from "../Counter/Counter";
-import {STEP} from "../../constants";
 
 const CounterScreen = () => {
 
@@ -16,13 +17,9 @@ const CounterScreen = () => {
     const message = useSelector<AppRootStateType, string>(state => state.counter.message);
     const counter = useSelector<AppRootStateType, number>(state => state.counter.counter);
 
-    const dispatch = useDispatch();
+    const dispatch = AppDispatch();
 
     useEffect(() => {
-       localStorage.setItem('maxValue', JSON.stringify(maxInputValue));
-        localStorage.setItem('startValue', JSON.stringify(startInputValue));
-
-        dispatch(setCounterValueAC(startInputValue));
         btnDisabling();
     }, [maxInputValue, startInputValue]);
 
@@ -42,14 +39,13 @@ const CounterScreen = () => {
     const incrementCounter = () => {
         if (counter < maxInputValue
             && counter >= 0) {
-            dispatch(setCounterValueAC(counter + STEP));
+            dispatch(setCounterValueAC(counter + 1));
         }
     }
 
     const resetCounter = () => {
         dispatch(setCounterValueAC(startInputValue));
     }
-
 
 
     return (

@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from "./ShowSettings.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import {
-    setMaxValueAC,
-    setStartValueAC,
+    getMaxValueFromLSTC,
+    getStartValueFromLSTC,
+    setMaxValueToLSTC,
+    setStartValueToLSTC,
     toggleSetButtonSetAC
-} from "../../reducers/settings_reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../store";
-import {setMessageAC} from "../../reducers/counter_reducer";
+} from "../../redux/reducers/settings_reducer";
+import {useSelector} from "react-redux";
+import {AppDispatch, AppRootStateType} from "../../redux/store";
+import {setCounterValueAC, setMessageAC} from "../../redux/reducers/counter_reducer";
 
 const Settings = () => {
 
@@ -18,15 +20,21 @@ const Settings = () => {
     const startInputValue = useSelector<AppRootStateType, number>(state => state.settings.startInputValue);
     const isDisabled = useSelector<AppRootStateType, boolean>(state => state.settings.idDisabled);
 
-    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getStartValueFromLSTC());
+        dispatch(getMaxValueFromLSTC());
+    }, [])
+
+    const dispatch = AppDispatch();
+
     const setMaxValue = (value: number) => {
-        // localStorage.setItem('maxValue', JSON.stringify(value));
-        dispatch(setMaxValueAC(value))
+        dispatch(setMaxValueToLSTC(value))
     }
 
     const setStartValue = (value: number) => {
-        // localStorage.setItem('startValue', JSON.stringify(value));
-        dispatch(setStartValueAC( value))
+        dispatch(setStartValueToLSTC(value));
+        dispatch(setCounterValueAC(value));
     }
 
     const onChangeHandler = (value: number, name: string) => {
