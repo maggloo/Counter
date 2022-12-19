@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, memo, useEffect, useState} from 'react';
 import s from '../ShowSettings/ShowSettings.module.css'
 
 type InputPropsType = {

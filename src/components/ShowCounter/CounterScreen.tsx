@@ -12,8 +12,6 @@ const CounterScreen = () => {
 
     let maxInputValue = useSelector<AppRootStateType, number>(state => state.settings.maxInputValue);
     let startInputValue = useSelector<AppRootStateType, number>(state => state.settings.startInputValue);
-
-
     const message = useSelector<AppRootStateType, string>(state => state.counter.message);
     const counter = useSelector<AppRootStateType, number>(state => state.counter.counter);
 

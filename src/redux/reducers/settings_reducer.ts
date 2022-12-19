@@ -1,5 +1,3 @@
-import {Dispatch} from "redux";
-import {setCounterValueAC} from "./counter_reducer";
 
 export type SettingsReducerInitialType = {
     maxInputValue: number,
@@ -56,14 +54,15 @@ export const toggleSetButtonSetAC = (isDisabled: boolean) => {
     } as const
 }
 
-
+// we don't need thunks when we use a preloader
 //thunk
-
+/*
 export const setStartValueToLSTC = (startValue: number) => (dispatch: Dispatch) => {
     localStorage.setItem('startValue', JSON.stringify(startValue));
     dispatch(setStartValueAC(startValue));
-}
+}*/
 
+/*
 export const setMaxValueToLSTC = (maxValue: number) => (dispatch: Dispatch) => {
     localStorage.setItem('maxValue', JSON.stringify(maxValue));
     dispatch(setMaxValueAC(maxValue))
@@ -85,3 +84,4 @@ export const getMaxValueFromLSTC = () => (dispatch: Dispatch) => {
         dispatch(setMaxValueAC(newVal))
     }
 }
+*/

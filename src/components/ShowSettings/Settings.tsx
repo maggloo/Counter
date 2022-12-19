@@ -1,14 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from "./ShowSettings.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import {
-    getMaxValueFromLSTC,
-    getStartValueFromLSTC,
-    setMaxValueToLSTC,
-    setStartValueToLSTC,
-    toggleSetButtonSetAC
-} from "../../redux/reducers/settings_reducer";
+import {setMaxValueAC, setStartValueAC, toggleSetButtonSetAC} from "../../redux/reducers/settings_reducer";
 import {useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../redux/store";
 import {setCounterValueAC, setMessageAC} from "../../redux/reducers/counter_reducer";
@@ -20,20 +14,22 @@ const Settings = () => {
     const startInputValue = useSelector<AppRootStateType, number>(state => state.settings.startInputValue);
     const isDisabled = useSelector<AppRootStateType, boolean>(state => state.settings.idDisabled);
 
-
-    useEffect(() => {
-        dispatch(getStartValueFromLSTC());
-        dispatch(getMaxValueFromLSTC());
-    }, [])
-
     const dispatch = AppDispatch();
 
+    // we don't need useEffect when we use a preloader
+    /* useEffect(() => {
+         dispatch(setStartValueAC(startInputValue));
+         dispatch(setMaxValueAC(maxInputValue));
+     }, [])
+    */
+
+
     const setMaxValue = (value: number) => {
-        dispatch(setMaxValueToLSTC(value))
+        dispatch(setMaxValueAC(value));
     }
 
     const setStartValue = (value: number) => {
-        dispatch(setStartValueToLSTC(value));
+        dispatch(setStartValueAC(value));
         dispatch(setCounterValueAC(value));
     }
 
